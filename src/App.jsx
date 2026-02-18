@@ -9,7 +9,7 @@ export function AppProvider({ children }) {
   const value = useMemo(() => {
     return {
       user,
-      setUser, // test
+      setUser, // features
       theme,
       setTheme, 
       isLogged: !!user,
