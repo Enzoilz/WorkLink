@@ -31,9 +31,9 @@ export default function App() {
         <Route element={<Layout />}>
           
         </Route>
-        <Route path='/dashboard' element={<MainRoutes />}>
+        {/* <Route path='/dashboard' element={<MainRoutes />}>
 
-        </Route>
+        </Route> */}
       </Routes>
     </BrowserRouter>
   )
