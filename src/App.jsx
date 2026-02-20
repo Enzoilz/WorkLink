@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { MainRoutes } from './routes/MainRoutes'
 import { useMemo, useState } from 'react'
+import { Layout } from './layout/Layout';
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -9,7 +10,7 @@ export function AppProvider({ children }) {
   const value = useMemo(() => {
     return {
       user,
-      setUser, // features
+      setUser,
       theme,
       setTheme, 
       isLogged: !!user,
@@ -27,7 +28,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainRoutes />}>
+        <Route element={<Layout />}>
+          
+        </Route>
+        <Route path='/dashboard' element={<MainRoutes />}>
 
         </Route>
       </Routes>
