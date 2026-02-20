@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react'
 import './index.css'
 import { Login } from './routes/Login';
 import {SignUp} from './routes/SignUp';
-
+import { Layout } from './layout/Layout';
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -13,7 +13,7 @@ export function AppProvider({ children }) {
   const value = useMemo(() => {
     return {
       user,
-      setUser, // features
+      setUser,
       theme,
       setTheme, 
       isLogged: !!user,
@@ -31,11 +31,15 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route element={<MainRoutes />}>
-
-        </Route> */}
+      
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<SignUp/>} ></Route>
+        <Route element={<Layout />}>
+          
+        </Route>
+        {/* <Route path='/dashboard' element={<MainRoutes />}>
+
+        </Route> */}
       </Routes>
     </BrowserRouter>
   )
