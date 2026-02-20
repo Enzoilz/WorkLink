@@ -28,12 +28,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Layout />}>
+        <Route index element={<Layout />}>
           
         </Route>
-        <Route path='/dashboard' element={<MainRoutes />}>
+        {/* <Route path='/dashboard' element={<MainRoutes />}>
 
-        </Route>
+        </Route> */}
       </Routes>
     </BrowserRouter>
   )
