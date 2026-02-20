@@ -1,10 +1,10 @@
 import { Link } from "react-router";
+import { useApp } from "../../hooks/useApp";
 
 
 export function Header() {
-
     return(
-        <header className="grid grid-cols-1 min-h-20 md:min-h-16 sm:min-h-16 color-background dark:color-background">
+        <header className="grid grid-cols-1 min-h-20 md:min-h-16 sm:min-h-16 bg-background dark:bg-background shadow-2xl shadow-color-ring">
             <div className="flex flex-row h-full items-center justify-between">
                 <div className="flex flex-row">
                     <div className="flex justify-center min-w-64">
@@ -20,7 +20,7 @@ export function Header() {
                     <button className="w-20 h-6 
                     
                     ">Login</button>
-                    <button>Register</button>
+                    <button onClick={handleClick}>Register</button>
                 </div>
             </div>
         </header>
