@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { MainRoutes } from './routes/MainRoutes'
 import { useMemo, useState } from 'react'
+import { Layout } from './layout/Layout';
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -27,9 +28,13 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<MainRoutes />}>
+        <Route index element={<Layout />}>
 
         </Route>
+
+        {/* <Route element={<MainRoutes />}>
+
+        </Route> */}
       </Routes>
     </BrowserRouter>
   )
