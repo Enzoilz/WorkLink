@@ -4,18 +4,22 @@ import { Link } from "react-router";
 export function Header() {
 
     return(
-        <header className="grid grid-cols-1 bg-red-600">
-            <div className="flex flex-row">
-                <div>
-                    <h3>WorkLink</h3>
+        <header className="grid grid-cols-1 min-h-20 md:min-h-16 sm:min-h-16 color-background dark:color-background">
+            <div className="flex flex-row h-full items-center justify-between">
+                <div className="flex flex-row">
+                    <div className="flex justify-center min-w-64">
+                        <h3>WorkLink</h3>
+                    </div>
+
+                    <div className="">
+                        <Link>Page d'accueil</Link>
+                    </div>
                 </div>
 
-                <div className="">
-                    <Link>Page d'accueil</Link>
-                </div>
-
-                <div>
-                    <button>Login</button>
+                <div className="flex flex-row gap-5 pr-10">
+                    <button className="w-20 h-6 
+                    
+                    ">Login</button>
                     <button>Register</button>
                 </div>
             </div>
