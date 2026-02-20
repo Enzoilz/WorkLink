@@ -1,6 +1,4 @@
 import { Link } from "react-router";
-import { useApp } from "../../hooks/useApp";
-
 
 export function Header() {
     return(
