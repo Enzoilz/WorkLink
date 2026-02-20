@@ -6,7 +6,7 @@ export function Layout() {
     return(
         <>
             <main>
-                <Outlet></Outlet>
+                <Outlet />
             </main>
         </>
     )
