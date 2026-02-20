@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 // import { MainRoutes } from './routes/MainRoutes'
 import { useMemo, useState } from 'react'
 import './index.css'
-import { Login } from './components/Login/Login';
-import {SignUp} from './components/SignUp/SignUp';
+import { Login } from './routes/Login';
+import {SignUp} from './routes/SignUp';
 
 
 export function AppProvider({ children }) {
