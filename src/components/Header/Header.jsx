@@ -20,7 +20,7 @@ export function Header() {
                     <button className="w-20 h-6 
                     
                     ">Login</button>
-                    <button onClick={handleClick}>Register</button>
+                    <button >Register</button>
                 </div>
             </div>
         </header>
