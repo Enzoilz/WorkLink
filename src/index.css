@@ -46,4 +46,107 @@
 
   --color-sidebar-border: #e0e7ff;
   --color-sidebar-ring: #8b5cf6;
+
+  --text-h1-desktop-size: 60px;
+  --text-h1-desktop-line: 72px;
+
+  --text-h1-tablet-size: 48px;
+  --text-h1-tablet-line: 48px;
+
+  --text-h1-mobile-size: 36px;
+  --text-h1-mobile-line: 40px;
+
+  --text-h2-desktop-size: 36px;
+  --text-h2-desktop-line: 40px;
+
+  --text-h2-tablet-size: 18px;
+  --text-h2-tablet-line: 28px;
+
+  --text-h3-desktop-size: 30px;
+  --text-h3-desktop-line: 36px;
+
+  --text-h3-tablet-size: 24px;
+  --text-h3-tablet-line: 32px;
+
+  --text-subtitle-size: 18px;
+  --text-subtitle-line: 30px;
+
+  /* ===== BODY ===== */
+
+  --text-body1-desktop-size: 18px;
+  --text-body1-desktop-line: 28px;
+
+  --text-body1-mobile-size: 16px;
+  --text-body1-mobile-line: 24px;
+
+  --text-body2-size: 16px;
+  --text-body2-line: 24px;
+
+  --text-body3-size: 14px;
+  --text-body3-line: 20px;
+}
+
+@utility text-h1 {
+  font-size: var(--text-h1-desktop-size);
+  line-height: var(--text-h1-desktop-line);
+  font-weight: 700;
+}
+
+@utility text-h2 {
+  font-size: var(--text-h2-desktop-size);
+  line-height: var(--text-h2-desktop-line);
+  font-weight: 600;
+}
+
+@utility text-h3 {
+  font-size: var(--text-h3-desktop-size);
+  line-height: var(--text-h3-desktop-line);
+  font-weight: 600;
+}
+
+@utility text-subtitle {
+  font-size: var(--text-subtitle-size);
+  line-height: var(--text-subtitle-line);
+  font-weight: 400;
+}
+
+@utility text-body1 {
+  font-size: var(--text-body1-desktop-size);
+  line-height: var(--text-body1-desktop-line);
+  font-weight: 400;
+}
+
+@utility text-body2 {
+  font-size: var(--text-body2-size);
+  line-height: var(--text-body2-line);
+  font-weight: 400;
+}
+
+@utility text-body3 {
+  font-size: var(--text-body3-size);
+  line-height: var(--text-body3-line);
+  font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+
+  .text-h1 {
+    font-size: var(--text-h1-tablet-size);
+    line-height: var(--text-h1-tablet-line);
+  }
+
+  .text-h2 {
+    font-size: var(--text-h2-tablet-size);
+    line-height: var(--text-h2-tablet-line);
+  }
+
+  .text-h3 {
+    font-size: var(--text-h3-tablet-size);
+    line-height: var(--text-h3-tablet-line);
+  }
+
+  .text-body1 {
+    font-size: var(--text-body1-mobile-size);
+    line-height: var(--text-body1-mobile-line);
+  }
 }

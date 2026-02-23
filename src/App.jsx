@@ -7,14 +7,17 @@ export const AppContext = createContext(AppProvider);
 
 function AppProvider({ children }) {
   const [user, setUser] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const value = useMemo(() => {
     return {
       user,
+      isOpen,
       setUser,
+      setIsOpen,
       isLogged: !!user,
     };
-  }, [user, theme])
+  }, [user, isOpen])
 
   return (
     <AppContext.Provider value={value}>
@@ -26,14 +29,16 @@ function AppProvider({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route index element={<Layout />}>
-          
-        </Route>
-        {/* <Route path='/dashboard' element={<MainRoutes />}>
+      <AppProvider>
+        <Routes>
+          <Route index element={<Layout />}>
+            
+          </Route>
+          {/* <Route path='/dashboard' element={<MainRoutes />}>
 
-        </Route> */}
-      </Routes>
+          </Route> */}
+        </Routes>
+      </AppProvider>
     </BrowserRouter>
   )
 }
