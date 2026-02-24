@@ -40,10 +40,8 @@ export const Login = () => {
       if (!res.ok) {
         throw new Error(`Nouvelle Erreur détectée : ${res.status} ${res.statusText}`)
       };
-      // console.log(data);
       const accessToken = localStorage.setItem("accessToken", data.token)
-      // console.log(auth)
-      // console.log(auth)
+
       if (auth) {
         navigate("/dashboard/welcome")
       } else {
@@ -52,8 +50,6 @@ export const Login = () => {
     } catch(err) {
       throw new Error(`Erreur détectée : ${err}`);
     }
-
-    console.log("User logged :", form);
   }
 
 return (
@@ -85,7 +81,7 @@ return (
            />
          </label>
 
-         {error ? <div>
+         {error ? <div className="bg-red-300 p-2 rounded">
             <p>{error}</p>
          </div> : ""}
         
