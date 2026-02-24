@@ -1,10 +1,13 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 // import { MainRoutes } from './routes/MainRoutes'
-import { useMemo, useState } from 'react'
+import { useMemo, useState, createContext, useEffect } from 'react'
 import './index.css'
 import { Login } from './routes/Login';
 import {SignUp} from './routes/SignUp';
+import {Dashboard} from './routes/Dashboard'
 import { Layout } from './layout/Layout';
+
+
 
 export function AppProvider({ children }) {
   const [user, setUser] = useState(null);
@@ -32,11 +35,11 @@ export default function App() {
     <BrowserRouter>
       <Routes>
       
-        <Route path="/login" element={<Login/>}></Route>
+        {/* <Route path="/login" element={<Login/>}></Route>
         <Route path="/signup" element={<SignUp/>} ></Route>
-        <Route element={<Layout />}>
+        <Route element={<Layout />}></Route> */}
+        <Route path="/" element={<Dashboard/>}></Route>
           
-        </Route>
         {/* <Route path='/dashboard' element={<MainRoutes />}>
 
         </Route> */}
