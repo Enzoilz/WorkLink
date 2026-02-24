@@ -1,10 +1,14 @@
 import { useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
+import { useApp } from "../hooks/useApp"
 
 export const Login = () => {
 
     const user = {email:'', password:'' }
     const [form, setForm] = useState(user)
+    const [error, setError] = useState("")
+    const { auth, setAuth } = useApp()
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
     const { name, value } = e.target
@@ -14,9 +18,42 @@ export const Login = () => {
     }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("User logged :", form)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const payload = {
+      email: form.email.trim(),
+      password: form.password.trim(),
+    };
+
+    try {
+      const res = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json()
+
+      if (!res.ok) {
+        throw new Error(`Nouvelle Erreur détectée : ${res.status} ${res.statusText}`)
+      };
+      // console.log(data);
+      const accessToken = localStorage.setItem("accessToken", data.token)
+      // console.log(auth)
+      // console.log(auth)
+      if (auth) {
+        navigate("/dashboard/welcome")
+      } else {
+        setError("Une erreur c'est produite !")
+      }
+    } catch(err) {
+      throw new Error(`Erreur détectée : ${err}`);
+    }
+
+    console.log("User logged :", form);
   }
 
 return (
@@ -47,10 +84,14 @@ return (
              onChange={handleChange}
            />
          </label>
+
+         {error ? <div>
+            <p>{error}</p>
+         </div> : ""}
         
          <button className="w-100 h-12.5 shrink-0 text-[24px] font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">Connexion</button> 
         <div className="flex gap-1">
-             <Link to="/signup"><p className="text-[20px] text-[#312E81] font-normal self-stretch"> Pas encore de compte ? S'inscrire</p></Link>
+             <Link to="/register"><p className="text-[20px] text-[#312E81] font-normal self-stretch"> Pas encore de compte ? S'inscrire</p></Link>
         </div>
      </div>
     </form>    

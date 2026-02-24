@@ -4,6 +4,7 @@ import { createContext, useEffect, useMemo, useState } from 'react'
 import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
+import { Dashboard } from './pages/Dashboard'
 
 export const AppContext = createContext(AppProvider);
 
@@ -12,16 +13,19 @@ function AppProvider({ children }) {
         // { id: 1, firstname: "", lastname: "", password: ""}
   ]);
   const [isOpen, setIsOpen] = useState(false);
-  // const [Error, setError] = useState("");
+  const [auth, setAuth] = useState(
+    localStorage.getItem("accessToken")
+  )
 
   const value = useMemo(() => {
     return {
-      user,
       isOpen,
+      auth,
       setUser,
       setIsOpen,
+      setAuth,
     };
-  }, [user, isOpen])
+  }, [auth, user, isOpen])
 
   return (
     <AppContext.Provider value={value}>
@@ -42,7 +46,7 @@ export default function App() {
             
           </Route>
           <Route path='/dashboard' element={<ProtectedRoute />}>
-            {/* <Route path='/dashboard/board' /> */}
+            <Route path='/dashboard/welcome' element={<Dashboard />} />
           </Route>
         </Routes>
       </AppProvider>
