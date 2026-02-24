@@ -1,11 +1,12 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router"
-
+import { useApp } from "../hooks/useApp"
 
 export const SignUp = () => {
 
-    const user = { firstname: '', lastname: '', email: '', password: '', check: '' }
+    const user = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
     const [form, setForm] = useState(user)
+    const navigate = useNavigate()
 
 
     const handleChange = (e) => {
@@ -17,9 +18,37 @@ export const SignUp = () => {
     }
 
     const handleSubmit = async (e) => {
-    e.preventDefault()
+        e.preventDefault()
 
-}
+        try {
+            const payload = {
+                firstName: form.firstName.trim(),
+                lastName: form.lastName.trim(),
+                email: form.email.trim(),
+                password: form.password.trim()
+            }
+
+            const res = await fetch("http://localhost:3000/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload)
+            })
+
+            const data = await res.json().catch(() => null);
+
+            if (!res.ok) {
+                const message = data?.message || data?.error || `Erreur détectée ${res.status} ${res.statusText}`;
+                console.error(message);
+            }
+            console.log("User created :", data ?? payload)
+            navigate("/login")
+        } catch(err) {
+            throw new Error(err)
+        }
+        console.log("User created :", form)
+    }
 
     return (
         <div className="w-full flex justify-center mt-24 md:mt-5">
@@ -38,7 +67,7 @@ export const SignUp = () => {
                                 type="text"
                                 name="firstname"
                                 placeholder="Entrer votre prénom"
-                                value={form.firstname}
+                                value={form.firstName}
                                 onChange={handleChange}
                             />
                         </label>
@@ -52,7 +81,7 @@ export const SignUp = () => {
                                 type="text"
                                 name="lastname"
                                 placeholder="Entrer votre nom"
-                                value={form.lastname}
+                                value={form.lastName}
                                 onChange={handleChange}
                             />
                         </label>
@@ -88,7 +117,7 @@ export const SignUp = () => {
                             type="password"
                             name="check"
                             placeholder="Confirmer votre mot de passe"
-                            value={form.check}
+                            value={form.confirmPassword}
                             onChange={handleChange}
                         />
                     </label>

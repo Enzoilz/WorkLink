@@ -1,9 +1,10 @@
 
 
-export function MainRoutes() {
+export function ProtectedRoute() {
 
     return(
         <>
+        
         </>
     )
 }

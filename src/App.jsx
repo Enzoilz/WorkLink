@@ -1,13 +1,18 @@
-import { BrowserRouter, Route, Routes } from 'react-router'
-import { MainRoutes } from './routes/MainRoutes'
-import { createContext, useMemo, useState } from 'react'
-import { Layout } from './layout/Layout';
+import { BrowserRouter, data, Route, Routes } from 'react-router'
+import { ProtectedRoute } from './routes/ProtectedRoutes'
+import { createContext, useEffect, useMemo, useState } from 'react'
+import { Layout } from './layout/Layout'
+import { Login } from "./routes/Login"
+import { SignUp } from "./routes/SignUp"
 
 export const AppContext = createContext(AppProvider);
 
 function AppProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([
+        // { id: 1, firstname: "", lastname: "", password: ""}
+  ]);
   const [isOpen, setIsOpen] = useState(false);
+  // const [Error, setError] = useState("");
 
   const value = useMemo(() => {
     return {
@@ -15,7 +20,6 @@ function AppProvider({ children }) {
       isOpen,
       setUser,
       setIsOpen,
-      isLogged: !!user,
     };
   }, [user, isOpen])
 
@@ -31,12 +35,15 @@ export default function App() {
     <BrowserRouter>
       <AppProvider>
         <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<SignUp />} />
+
           <Route index element={<Layout />}>
             
           </Route>
-          {/* <Route path='/dashboard' element={<MainRoutes />}>
-
-          </Route> */}
+          <Route path='/dashboard' element={<ProtectedRoute />}>
+            {/* <Route path='/dashboard/board' /> */}
+          </Route>
         </Routes>
       </AppProvider>
     </BrowserRouter>

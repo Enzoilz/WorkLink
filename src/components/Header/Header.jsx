@@ -1,7 +1,6 @@
 import { useApp } from "../../hooks/useApp.jsx";
 import { Link } from "react-router";
 import { motion, MotionConfig } from "motion/react"
-import { useState } from "react";
 
 export function Header() {
     const { isOpen, setIsOpen } = useApp()
