@@ -1,27 +1,23 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
-// import { MainRoutes } from './routes/MainRoutes'
-import { useMemo, useState, createContext, useEffect } from 'react'
-import './index.css'
-import { Login } from './routes/Login';
-import {SignUp} from './routes/SignUp';
-import {Dashboard} from './routes/Dashboard'
+import { MainRoutes } from './routes/MainRoutes'
+import { createContext, useMemo, useState } from 'react'
 import { Layout } from './layout/Layout';
 
+export const AppContext = createContext(AppProvider);
 
-
-export function AppProvider({ children }) {
+function AppProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [theme, setTheme] = useState("dark");
+  const [isOpen, setIsOpen] = useState(false);
 
   const value = useMemo(() => {
     return {
       user,
+      isOpen,
       setUser,
-      theme,
-      setTheme, 
+      setIsOpen,
       isLogged: !!user,
     };
-  }, [user, theme])
+  }, [user, isOpen])
 
   return (
     <AppContext.Provider value={value}>
@@ -33,17 +29,16 @@ export function AppProvider({ children }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-      
-        {/* <Route path="/login" element={<Login/>}></Route>
-        <Route path="/signup" element={<SignUp/>} ></Route>
-        <Route element={<Layout />}></Route> */}
-        <Route path="/" element={<Dashboard/>}></Route>
-          
-        {/* <Route path='/dashboard' element={<MainRoutes />}>
+      <AppProvider>
+        <Routes>
+          <Route index element={<Layout />}>
+            
+          </Route>
+          {/* <Route path='/dashboard' element={<MainRoutes />}>
 
-        </Route> */}
-      </Routes>
+          </Route> */}
+        </Routes>
+      </AppProvider>
     </BrowserRouter>
   )
 }
