@@ -10,7 +10,7 @@ export const Login = () => {
     const { auth, setAuth } = useApp()
     const navigate = useNavigate()
 
-    const handleChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target
     setForm(prev => ({
       ...prev,
@@ -92,7 +92,7 @@ return (
      </div>
     </form>    
     </div>
-)
+  )
 
 }
 
