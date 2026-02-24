@@ -1,13 +1,17 @@
 import { useNavigate } from "react-router"
 import { useApp } from "../hooks/useApp"
-import { useEffect } from "react"
+import { Board } from "../pages/Board"
+import { Aside } from "../components/Aside/Aside"
 
 
 export function ProtectedRoute() {
     const navigate = useNavigate()
     const { auth } = useApp()
 
-    useEffect(() => {
-        return auth ? navigate("/dashboard/welcome") : navigate("/login")
-    }, [auth])
+    return auth ? (
+        <>
+            <Aside />
+            <Board />
+        </>
+    ) : navigate("/login")
 }

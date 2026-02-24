@@ -4,7 +4,7 @@ import { createContext, useMemo, useState } from 'react'
 import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
-import { Welcome } from './pages/Welcome'
+import { Board } from './pages/Board'
 
 export const AppContext = createContext(AppProvider);
 
@@ -49,7 +49,7 @@ export default function App() {
             
           </Route>
           <Route path='/dashboard' element={<ProtectedRoute />}>
-            <Route path='/dashboard/welcome' element={<Welcome />} />
+
           </Route>
         </Routes>
       </AppProvider>
