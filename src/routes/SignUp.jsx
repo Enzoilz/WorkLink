@@ -65,7 +65,7 @@ export const SignUp = () => {
                                 className=" w-40 md:w-50 h-7.5 md:h-[50] rounded-[10px] p-1 bg-[#FFFFFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                                 required
                                 type="text"
-                                name="firstname"
+                                name="firstName"
                                 placeholder="Entrer votre prénom"
                                 value={form.firstName}
                                 onChange={handleChange}
@@ -79,7 +79,7 @@ export const SignUp = () => {
                                 className="w-40 md:w-50 h-7.5 md:h-[50] rounded-[10px] p-1 bg-[#FFFFFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                                 required
                                 type="text"
-                                name="lastname"
+                                name="lastName"
                                 placeholder="Entrer votre nom"
                                 value={form.lastName}
                                 onChange={handleChange}
@@ -115,12 +115,15 @@ export const SignUp = () => {
                         <input className="w-61.75 md:w-100 h-7.5 md:h-12.5 shrink-0 rounded-[10px] bg-[#FFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                             required
                             type="password"
-                            name="check"
+                            name="confirmPassword"
                             placeholder="Confirmer votre mot de passe"
                             value={form.confirmPassword}
                             onChange={handleChange}
                         />
                     </label>
+
+                    
+
                     <button className="w-50 md:w-100 h-7.5 md:h-12.5 shrink-0 text-[16px] md:text-[24px]  font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">S'inscrire</button>
 
                     <Link to="/login"><p className=" text-[16px] md:text-[20px] text-[#312E81] font-normal self-stretch mb-1">Déjà inscrit ? Se connecter</p></Link>

@@ -1,10 +1,10 @@
-import { BrowserRouter, data, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import { ProtectedRoute } from './routes/ProtectedRoutes'
-import { createContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useMemo, useState } from 'react'
 import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
-import { Dashboard } from './pages/Dashboard'
+import { Welcome } from './pages/Welcome'
 
 export const AppContext = createContext(AppProvider);
 
@@ -16,16 +16,19 @@ function AppProvider({ children }) {
   const [auth, setAuth] = useState(
     localStorage.getItem("accessToken")
   )
+  const [error, setError] = useState("")
 
   const value = useMemo(() => {
     return {
       isOpen,
       auth,
+      error,
       setUser,
       setIsOpen,
       setAuth,
+      setError,
     };
-  }, [auth, user, isOpen])
+  }, [auth, user, isOpen, error])
 
   return (
     <AppContext.Provider value={value}>
@@ -46,7 +49,7 @@ export default function App() {
             
           </Route>
           <Route path='/dashboard' element={<ProtectedRoute />}>
-            <Route path='/dashboard/welcome' element={<Dashboard />} />
+            <Route path='/dashboard/welcome' element={<Welcome />} />
           </Route>
         </Routes>
       </AppProvider>
