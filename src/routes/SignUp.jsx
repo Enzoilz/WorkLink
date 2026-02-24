@@ -1,10 +1,12 @@
 import { useState } from "react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
+import { useApp } from "../hooks/useApp"
 
 export const SignUp = () => {
 
-    const user = { firstname: '', lastname: '', email: '', password: '' }
+    const user = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
     const [form, setForm] = useState(user)
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -14,8 +16,36 @@ export const SignUp = () => {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        try {
+            const payload = {
+                firstName: form.firstName.trim(),
+                lastName: form.lastName.trim(),
+                email: form.email.trim(),
+                password: form.password.trim()
+            }
+
+            const res = await fetch("http://localhost:3000/auth/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload)
+            })
+
+            const data = await res.json().catch(() => null);
+
+            if (!res.ok) {
+                const message = data?.message || data?.error || `Erreur détectée ${res.status} ${res.statusText}`;
+                console.error(message);
+            }
+            console.log("User created :", data ?? payload)
+            navigate("/login")
+        } catch(err) {
+            throw new Error(err)
+        }
         console.log("User created :", form)
     }
 
@@ -24,7 +54,9 @@ export const SignUp = () => {
         <form onSubmit={handleSubmit}>
             <div className="flex w-150 h-[700] px-12.25 py-10 flex-col items-start gap-5
          shrink-0 rounded-[20px] bg-[#FFF] shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
-                <h3 className="text-[30px] font-semibold text-[#312E81] tracking-[-0.6px] leading-9 mb-5">Sign Up</h3>
+                <h3 className="text-[30px] font-semibold text-[#312E81] tracking-[-0.6px] leading-9 mb-5">
+                    Sign Up
+                </h3>
                 <div className="flex gap-4" >
                     <label className="flex flex-col gap-5">
                         <h3 className="text-[30px] font-semibold text-[#312E81] tracking-[-0.6px] leading-9">Firstname</h3>
@@ -32,9 +64,9 @@ export const SignUp = () => {
                             className="w-50 h-[50] rounded-[10px] p-1 bg-[#FFFFFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                             required
                             type="text"
-                            name="firstname"
+                            name="firstName"
                             placeholder="Entrer votre prénom"
-                            value={form.firstname}
+                            value={form.firstName}
                             onChange={handleChange}
                         />
                     </label>
@@ -44,9 +76,9 @@ export const SignUp = () => {
                             className="w-50 h-[50] rounded-[10px] p-1 bg-[#FFFFFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                             required
                             type="text"
-                            name="lastname"
+                            name="lastName"
                             placeholder="Entrer votre nom"
-                            value={form.lastname}
+                            value={form.lastName}
                             onChange={handleChange}
                         />
                     </label>
@@ -76,9 +108,9 @@ export const SignUp = () => {
                     <input className="w-100 h-12.5 shrink-0 rounded-[10px] bg-[#FFF] shadow-[0_2px_20px_rgba(139,92,246,0.40)]"
                         required
                         type="password"
-                        name="password"
+                        name="confirmPassword"
                         placeholder="Confirmer votre mot de passe"
-                        value={form.password}
+                        value={form.confirmPassword}
                         onChange={handleChange}
                     />
                 </label>
