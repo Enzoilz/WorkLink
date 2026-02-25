@@ -1,11 +1,10 @@
-import { BrowserRouter, data, Route, Routes } from 'react-router'
+import { BrowserRouter, Route, Routes } from 'react-router'
 import { ProtectedRoute } from './routes/ProtectedRoutes'
-import { createContext, useEffect, useMemo, useState } from 'react'
-// import { Layout } from './layout/Layout'
+import { createContext, useMemo, useState } from 'react'
+import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
-import { AddJob } from './components/AddJob/AddJob'
-import { Sheet } from './pages/sheet'
+import { Home } from './pages/Home'
 
 export const AppContext = createContext(AppProvider);
 
@@ -14,16 +13,22 @@ function AppProvider({ children }) {
         // { id: 1, firstname: "", lastname: "", password: ""}
   ]);
   const [isOpen, setIsOpen] = useState(false);
-  // const [Error, setError] = useState("");
+  const [auth, setAuth] = useState(
+    localStorage.getItem("accessToken")
+  )
+  const [error, setError] = useState("")
 
   const value = useMemo(() => {
     return {
-      user,
       isOpen,
+      auth,
+      error,
       setUser,
       setIsOpen,
+      setAuth,
+      setError,
     };
-  }, [user, isOpen])
+  }, [auth, user, isOpen, error])
 
   return (
     <AppContext.Provider value={value}>
@@ -42,11 +47,11 @@ export default function App() {
           <Route path='/add' element={<AddJob/>} />
           <Route path='/sheet' element={<Sheet/>} />
 
-          {/* <Route index element={<Layout />}>
-            
-          </Route> */}
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />} />
+          </Route>
           <Route path='/dashboard' element={<ProtectedRoute />}>
-            {/* <Route path='/dashboard/board' /> */}
+
           </Route>
         </Routes>
       </AppProvider>

@@ -4,6 +4,8 @@ import { AddJob } from "../components/AddJob/AddJob";
 import { LuPanelRightClose } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentUser } from "react-icons/gr";
+import { AnimatePage } from "../components/AnimatePage/AnimatePage";
+
 
 export const Sheet = () => {
 
@@ -26,7 +28,7 @@ export const Sheet = () => {
     };
 
     return (
-        // <AnimatePages>
+        <AnimatePage>
         <>
                 <div className="flex">
                 <button className="flex text-4xl mt-6 ml-5 min-h-full text-[#312E81]  cursor-pointer"><LuPanelRightClose /></button>
@@ -125,6 +127,6 @@ export const Sheet = () => {
                     ) )}
                 </div>)} 
         </>
-        // </AnimatePages>
+        </AnimatePage>
     )
 }

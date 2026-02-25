@@ -1,9 +1,18 @@
 import { useApp } from "../../hooks/useApp.jsx";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion, MotionConfig } from "motion/react"
 
 export function Header() {
     const { isOpen, setIsOpen } = useApp()
+    const navigate = useNavigate()
+
+    const handleLogin = () => {
+        navigate("/login");
+    }
+
+    const handleRegister = () => {
+        navigate("/register")
+    }
 
     return(
         <div>
@@ -22,8 +31,8 @@ export function Header() {
                     </nav>
 
                     <div className="hidden md:flex md:gap-2 md:pr-2">
-                        <button className="w-24 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Login</button>
-                        <button className="w-24 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Register</button>
+                        <motion.button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleLogin}>Login</motion.button>
+                        <motion.button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleRegister}>Register</motion.button>
                     </div>
 
                     <div className="md:hidden gap-5 mr-5 cursor-pointer">
@@ -33,8 +42,8 @@ export function Header() {
                 </div>
             
             </header>
-            <main className="h-screen">
-                { isOpen && <motion.div className="h-full w-full bg-card flex flex-col justify-around items-center" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}>
+            { isOpen && <main className="h-screen">
+                <motion.div className="h-full w-full bg-card flex flex-col justify-around items-center" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}>
                     <nav className="flex justify-center items-center w-full h-10 ">
                         <div className="flex justify-center items-center w-44 h-full">
                             <Link className="text-h3 md:text-body2 text-foreground">Page d'accueil</Link>
@@ -42,11 +51,11 @@ export function Header() {
                     </nav>
 
                     <div className="flex justify-center flex-col gap-2">
-                        <button className="w-48 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Login</button>
-                        <button className="w-48 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Register</button>
+                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" onClick={handleLogin}>Login</button>
+                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" onClick={handleRegister}>Register</button>
                     </div>
-                </motion.div> }
-            </main>
+                </motion.div>
+            </main> }
         </div>
     )
 }
