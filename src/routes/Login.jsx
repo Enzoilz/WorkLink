@@ -43,7 +43,7 @@ export const Login = () => {
       const accessToken = localStorage.setItem("accessToken", data.token)
 
       if (auth) {
-        navigate("/dashboard/welcome")
+        navigate("/dashboard")
       } else {
         setError("Une erreur c'est produite !")
       }
