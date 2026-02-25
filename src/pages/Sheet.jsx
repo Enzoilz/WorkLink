@@ -5,6 +5,8 @@ import { LuPanelRightClose } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentUser } from "react-icons/gr";
 import { AnimatePage } from "../components/AnimatePage/AnimatePage";
+import { useApp } from "../hooks/useApp";
+import { useNavigate } from "react-router";
 
 
 export const Sheet = () => {
@@ -12,6 +14,8 @@ export const Sheet = () => {
     const [jobs, setJobs] = useState([]);
     const [modal, setModal] = useState(false);
     const [info, setInfo] = useState(false);
+    const { error, setError, auth } = useApp()
+    const navigate = useNavigate()
 
     useEffect(() => {
         fetchJobs();
@@ -19,11 +23,17 @@ export const Sheet = () => {
 
     const fetchJobs = async () => {
         try {
-            const res = await fetch('')
-            const data = await res.json()
-            setJobs(data);
+            const res = await fetch('http://localhost:3000/job/Job%20%C3%A9t%C3%A9%202026/1', {});
+            const data = await res.json();
+            if (data.message === "You must have to be connected") {
+                console.log(auth)
+                const deleteToken = localStorage.removeItem("accessToken", auth)
+                navigate("/login")
+            } else {
+                return data;
+            }
         } catch (err) {
-            console.error(err);
+            throw new Error(`Nouvelle erreur détectée : ${err}`)
         };
     };
 
