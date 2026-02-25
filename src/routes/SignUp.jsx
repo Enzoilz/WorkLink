@@ -7,6 +7,7 @@ export const SignUp = () => {
 
     const user = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
     const [form, setForm] = useState(user)
+    const { error, setError } = useApp()
     const navigate = useNavigate()
 
 
@@ -39,11 +40,10 @@ export const SignUp = () => {
 
             const data = await res.json().catch(() => null);
 
-            if (!res.ok) {
-                const message = data?.message || data?.error || `Erreur détectée ${res.status} ${res.statusText}`;
-                console.error(message);
+            if (!res.ok) { 
+                return setError(`Register failed`)
             }
-            console.log("User created :", data ?? payload)
+            console.log("User created :", data.message ?? payload)
             navigate("/login")
         } catch(err) {
             throw new Error(err)
@@ -124,7 +124,9 @@ export const SignUp = () => {
                             />
                         </label>
 
-                        
+                        {error ? <div>
+                            <p>{error}</p>
+                        </div> : ""}
 
                         <button className="w-50 md:w-100 h-7.5 md:h-12.5 shrink-0 text-[16px] md:text-[24px]  font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">S'inscrire</button>
 

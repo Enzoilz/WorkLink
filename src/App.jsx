@@ -16,6 +16,7 @@ function AppProvider({ children }) {
   const [auth, setAuth] = useState(
     localStorage.getItem("accessToken")
   )
+
   const [error, setError] = useState("")
 
   const value = useMemo(() => {

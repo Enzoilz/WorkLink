@@ -7,7 +7,7 @@ export const Login = () => {
 
     const user = {email:'', password:'' }
     const [form, setForm] = useState(user)
-    const { auth, setAuth, error, setError } = useApp()
+    const { auth, error, setError } = useApp()
     const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -38,14 +38,14 @@ export const Login = () => {
       const data = await res.json()
 
       if (!res.ok) {
-        throw new Error(`Nouvelle Erreur détectée : ${res.status} ${res.statusText}`)
+        return setError(`${data.message}`)
       };
       const accessToken = localStorage.setItem("accessToken", data.token)
 
       if (auth) {
         navigate("/dashboard")
       } else {
-        setError("Une erreur c'est produite !")
+        return setError(`${data.message}`)
       }
     } catch(err) {
       throw new Error(`Erreur détectée : ${err}`);
@@ -55,7 +55,7 @@ export const Login = () => {
 return (
     <AnimatePage>
       <div className="w-full flex justify-center mt-5">
-      <form className="flex w-150 h-175   items-center gap-2.5 shrink-0 " onSubmit={handleSubmit}>
+      <form className="container flex w-150 h-175   items-center gap-2.5 shrink-0 " onSubmit={handleSubmit}>
       <div className="flex w-150 h-150 px-12.25 py-10 flex-col items-start gap-10 shrink-0 rounded-[20px] bg-[#FFF] shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
           <h3 className="text-[30px] font-semibold text-[#312E81] tracking-[-0.6px] leading-9">Login</h3>
           <label className="flex flex-col gap-5">
@@ -82,15 +82,15 @@ return (
             />
           </label>
 
-          {error ? <div className="bg-red-300 p-2 rounded">
+          {error ? <div className="relative bg-red-300 p-2 rounded">
               <p>{error}</p>
           </div> : ""}
           
-          <button className="w-100 h-12.5 shrink-0 text-[24px] font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">Connexion</button> 
+          <button className="w-80 h-12.5 shrink-0 text-[24px] font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">Connexion</button> 
           <div className="flex gap-1">
               <Link to="/register"><p className="text-[20px] text-[#312E81] font-normal self-stretch"> Pas encore de compte ? S'inscrire</p></Link>
           </div>
-      </div>
+        </div>
       </form>    
     </div>
     </AnimatePage>
