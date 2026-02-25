@@ -88,7 +88,7 @@ return (
           
           <button className="w-80 h-12.5 shrink-0 text-[24px] font-semibold text-[#FFF] rounded-[10px] bg-[#8B5CF6] shadow-[2px_4px_4px_rgba(139,92,246,0.30)] tracking-[-0.48px] cursor-pointer " type="submit">Connexion</button> 
           <div className="flex gap-1">
-              <Link to="/register"><p className="text-[20px] text-[#312E81] font-normal self-stretch"> Pas encore de compte ? S'inscrire</p></Link>
+            <Link to="/register"><p className="text-[16px] md:text-body3-line text-[#312E81] font-normal self-stretch"> Pas encore de compte ? S'inscrire</p></Link>
           </div>
         </div>
       </form>    
