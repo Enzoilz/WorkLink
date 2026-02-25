@@ -5,6 +5,8 @@ import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
 import { Home } from './pages/Home'
+import { AddJob } from './components/AddJob/AddJob'
+import { Sheet } from './pages/Sheet'
 
 export const AppContext = createContext(AppProvider);
 
