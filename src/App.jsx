@@ -1,9 +1,11 @@
 import { BrowserRouter, data, Route, Routes } from 'react-router'
 import { ProtectedRoute } from './routes/ProtectedRoutes'
 import { createContext, useEffect, useMemo, useState } from 'react'
-import { Layout } from './layout/Layout'
+// import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
+import { AddJob } from './components/AddJob/AddJob'
+import { Sheet } from './pages/sheet'
 
 export const AppContext = createContext(AppProvider);
 
@@ -37,10 +39,12 @@ export default function App() {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<SignUp />} />
+          <Route path='/add' element={<AddJob/>} />
+          <Route path='/sheet' element={<Sheet/>} />
 
-          <Route index element={<Layout />}>
+          {/* <Route index element={<Layout />}>
             
-          </Route>
+          </Route> */}
           <Route path='/dashboard' element={<ProtectedRoute />}>
             {/* <Route path='/dashboard/board' /> */}
           </Route>

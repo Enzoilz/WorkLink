@@ -22,8 +22,8 @@ export function Header() {
                     </nav>
 
                     <div className="hidden md:flex md:gap-2 md:pr-2">
-                        <button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Login</button>
-                        <button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Register</button>
+                        <button className="w-24 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Login</button>
+                        <button className="w-24 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Register</button>
                     </div>
 
                     <div className="md:hidden gap-5 mr-5 cursor-pointer">
@@ -42,8 +42,8 @@ export function Header() {
                     </nav>
 
                     <div className="flex justify-center flex-col gap-2">
-                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Login</button>
-                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Register</button>
+                        <button className="w-48 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Login</button>
+                        <button className="w-48 h-7 bg-primary rounded-lg text-primary-foreground cursor-pointer">Register</button>
                     </div>
                 </motion.div> }
             </main>

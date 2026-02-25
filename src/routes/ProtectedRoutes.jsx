@@ -1,10 +1,7 @@
-
-
 export function ProtectedRoute() {
 
     return(
         <>
-        
         </>
     )
 }
