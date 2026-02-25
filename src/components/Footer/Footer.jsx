@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import { motion } from "motion/react"
 import facebook from "../../assets/icons/facebook.svg"
 import instagram from "../../assets/icons/instagram.svg"
 import linkedin from "../../assets/icons/linkedin.svg"
@@ -23,13 +24,13 @@ export function Footer() {
                 </div>
                 <div className="flex flex-row justify-between w-28 h-5 md:w-36">
                     <div className="w-5 h-5">
-                        <img src={facebook} alt="Facebook" />
+                        <a href="https://www.facebook.com/" target="_blank"><motion.img src={facebook} alt="Facebook" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} /></a>
                     </div>
                     <div className="w-5 h-5">
-                        <img src={instagram} alt="Instagram" />
+                        <a href="https://www.instagram.com/" target="_blank"><motion.img src={instagram} alt="Instagram" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} /></a>
                     </div>
                     <div className="w-5 h-5">
-                        <img src={linkedin} alt="Linkedin" />
+                        <a href="https://www.linkedin.com/" target="_blank"><motion.img src={linkedin} alt="Linkedin" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} /></a>
                     </div>
                 </div>
                 

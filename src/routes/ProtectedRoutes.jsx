@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router"
 import { useApp } from "../hooks/useApp"
-import { Board } from "../pages/Board"
 import { Aside } from "../components/Aside/Aside"
+import { Sheet } from "../pages/Sheet"
 
 
 export function ProtectedRoute() {
@@ -11,7 +11,7 @@ export function ProtectedRoute() {
     return auth ? (
         <>
             <Aside />
-            <Board />
+            <Sheet />
         </>
     ) : navigate("/login")
 }
