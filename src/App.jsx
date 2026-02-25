@@ -4,7 +4,7 @@ import { createContext, useMemo, useState } from 'react'
 import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
-import { Board } from './pages/Board'
+import { Home } from './pages/Home'
 
 export const AppContext = createContext(AppProvider);
 
@@ -45,8 +45,8 @@ export default function App() {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<SignUp />} />
 
-          <Route index element={<Layout />}>
-            
+          <Route path='/' element={<Layout />}>
+            <Route index element={<Home />} />
           </Route>
           <Route path='/dashboard' element={<ProtectedRoute />}>
 

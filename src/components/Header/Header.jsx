@@ -33,8 +33,8 @@ export function Header() {
                 </div>
             
             </header>
-            <main className="h-screen">
-                { isOpen && <motion.div className="h-full w-full bg-card flex flex-col justify-around items-center" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}>
+            { isOpen && <main className="h-screen">
+                <motion.div className="h-full w-full bg-card flex flex-col justify-around items-center" initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }}>
                     <nav className="flex justify-center items-center w-full h-10 ">
                         <div className="flex justify-center items-center w-44 h-full">
                             <Link className="text-h3 md:text-body2 text-foreground">Page d'accueil</Link>
@@ -45,8 +45,8 @@ export function Header() {
                         <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Login</button>
                         <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer">Register</button>
                     </div>
-                </motion.div> }
-            </main>
+                </motion.div>
+            </main> }
         </div>
     )
 }
