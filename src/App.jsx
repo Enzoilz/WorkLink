@@ -47,14 +47,13 @@ export default function App() {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<SignUp />} />
-          <Route path='/add' element={<AddJob/>} />
-          <Route path='/sheet' element={<Sheet/>} />
 
           <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
           </Route>
-          <Route path='/dashboard' element={<ProtectedRoute />}>
-
+          <Route element={<ProtectedRoute />}>
+            <Route path='/add' element={<AddJob/>} />
+            <Route path='/sheet' element={<Sheet/>} />
           </Route>
         </Routes>
       </AppProvider>
