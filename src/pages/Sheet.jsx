@@ -13,6 +13,7 @@ export const Sheet = () => {
     const [modal, setModal] = useState(false);
     const [info, setInfo] = useState(false);
 
+
     useEffect(() => {
         fetchJobs();
     }, []);
@@ -25,27 +26,28 @@ export const Sheet = () => {
         } catch (err) {
             console.error(err);
         };
-    };
+    }; 
+
 
     return (
         <AnimatePage>
         <>
                 <div className="flex">
-                <button className="flex text-4xl mt-6 ml-5 min-h-full text-[#312E81]  cursor-pointer"><LuPanelRightClose /></button>
+                <button className="flex text-4xl mt-6 ml-5 min-h-full text-foreground cursor-pointer"><LuPanelRightClose /></button>
                 <div className=" w-full md:flex justify-center px-4">
-                    <div className=" w-full max-w-7xl px-4 md:px-8 md:py-8 my-6 md:border border-[#E0E7FF]
+                    <div className=" w-full max-w-7xl px-4 md:px-8 md:py-8 my-6 md:border border-border
                             rounded-xl bg-white md:shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
                         <div className="flex justify-between md:flex-row md:items-center md:justify-between md:gap-4">
-                            <div className=" w-50  flex md:w-full md:max-w-md h-10 pl-3 gap-2 items-center border rounded-md border-[#E0E7FF] shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
-                                <CiSearch className="text-[#8B5CF6] text-body3-line" />
+                            <div className=" w-50  flex md:w-full md:max-w-md h-10 pl-3 gap-2 items-center border rounded-md border-border shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
+                                <CiSearch className="text-ring text-body3-line" />
                                 <input
-                                    className="w-full text-[#8B5CF6] outline-none"
+                                    className="w-full text-ring outline-none"
                                     type="text"
                                     placeholder="Search..."
                                 />
                             </div>
                 
-                            <button type="button" onClick={()=> setModal(true) } className="h-10 px-4 border w-20 md:w-35.5 border-[#E0E7FF] bg-white text-[#8B5CF6] text-[16px] md:text-[18px] font-semibold rounded-md cursor-pointer">
+                            <button type="button" onClick={()=> setModal(true) } className="h-10 px-4 border w-20 md:w-35.5 border-border bg-white text-ring text-[16px] md:text-[18px] font-semibold rounded-md cursor-pointer">
                                 Add
                             </button>
                         </div>
@@ -54,7 +56,7 @@ export const Sheet = () => {
                         <div className="hidden md:block w-full mt-6 ">
                             <table className="w-full min-w-175 table-fixed">
                                 <thead>
-                                    <tr className="border-b border-[#E0E7FF]">
+                                    <tr className="border-b border-border">
                                         <th className="py-2">Company</th>
                                         <th className="py-2">Job</th>
                                         <th className="py-2">Contact</th>
@@ -65,7 +67,7 @@ export const Sheet = () => {
                                 </thead>
                                 <tbody>
                                     {jobs.map((job) => (
-                                        <tr key={job.id} className="border-b border-[#E0E7FF]">
+                                        <tr key={job.id} className="border-b border-border">
                                             <td className="py-2">{job.company}</td>
                                             <td className="py-2">{job.job}</td>
                                             <td className="py-2">{job.email}</td>
@@ -74,7 +76,10 @@ export const Sheet = () => {
                                             <td className="py-2 gap-2">
                                              {/* Test bouton delete et info */}
                                                 <div className="flex gap-2">
-                                                    <button onClick={setInfo(true)}><GrDocumentUser /></button>
+                                                {/* Bouton info */}
+                                                    <button onClick={() => setInfo(true)}
+                                                    ><GrDocumentUser /></button>
+                                                    {/* Bouton delete */}
                                                     <button><RiDeleteBin6Line /></button>
                                                 </div>
                                             </td>
@@ -84,8 +89,8 @@ export const Sheet = () => {
                             </table>
                         </div>
                         {/* Bloc mobile     */}
-                        <div className="bg-[#F5F3FF] flex flex-col gap-4 mt-6 p-4 rounded-xl">
-                            <h3 className="text-center font-semibold text-[#312E81] md:hidden">
+                        <div className="bg-muted flex flex-col gap-4 mt-6 p-4 rounded-xl">
+                            <h3 className="text-center font-semibold text-foreground md:hidden">
                                 Entreprises ajoutées
                             </h3>
                 
@@ -100,10 +105,11 @@ export const Sheet = () => {
                                         <div>
                                         {/* Test bouton delete et info */}
                                         <div className="flex gap-2">
-                                            <button onClick={setInfo(true)}><GrDocumentUser /></button>
+                                            {/* Bouton info */}
+                                            <button onClick={() => setInfo(true)}><GrDocumentUser /></button>
+                                            {/* Bouton delete */}
                                             <button ><RiDeleteBin6Line /></button>
                                         </div>
-
                                         </div>
                                     </div>
                                 ))}
@@ -114,15 +120,16 @@ export const Sheet = () => {
                     </div>
                 </div>
                 </div>
-                <div className="w-25 hidden">
-                    <p>5</p>
-                </div>
-                  
-            {modal && (<AddJob onClose={()=>setModal(false)} onSucces={fetchJobs}/>) } 
-            {info && ( <div className="">
+               
+                                
+                
+            {modal && (<AddJob onClose={()=>setModal(false)} onSucces={fetchJobs}/>) }
+
+            {info && ( <div className="w-full flex min-h-screen justify-center items-center inset-0 z-50 bg-black/50">
                     {jobs.map((job)=>(
                         <div>
                             <p>{job.note}</p>
+                            <button onClick={() => setInfo(null)}>Close</button>
                         </div>
                     ) )}
                 </div>)} 
