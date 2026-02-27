@@ -36,12 +36,10 @@ export const Login = () => {
       });
 
       const data = await res.json()
-
       if (!res.ok) {
         return setError(`${data.message}`)
       };
       const accessToken = localStorage.setItem("accessToken", data.token)
-
       if (auth) {
         navigate("/sheet")
       } else {

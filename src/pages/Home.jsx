@@ -23,7 +23,7 @@ export function Home() {
                     <input
                         type="search"
                         placeholder="Search..."
-                        className="border border-input rounded-[6px] text-ring bg-transparent pl-8 py-1 md:w-96"
+                        className="border border-input rounded-[0.375rem] text-ring bg-transparent pl-8 py-1 md:w-96"
                     />
                 </motion.div>
                 <motion.h1 className="text-card-foreground text-h1" animate={{ opacity: [0, 0.2, 0.5, 1] }}>
@@ -36,7 +36,7 @@ export function Home() {
                     simplifie la mise en relation entre compétences réelles et opportunités concrètes.
                 </motion.p>
                 <div>
-                    <motion.button className="h-8 pl-14 pr-14 bg-primary text-body1 font-semibold text-primary-foreground rounded-[8px] flex items-center flex-row gap-2 shadow-2xl shadow-ring cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }}>Commencer <div className="pt-1"><Arrow /></div></motion.button>
+                    <motion.button className="h-8 pl-14 pr-14 bg-primary text-body1 font-semibold text-primary-foreground rounded-[0.5rem] flex items-center flex-row gap-2 shadow-2xl shadow-ring cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }}>Commencer <div className="pt-1"><Arrow /></div></motion.button>
                 </div>
             </div>
         </AnimatePage>

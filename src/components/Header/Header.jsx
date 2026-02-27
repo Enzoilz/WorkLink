@@ -31,8 +31,8 @@ export function Header() {
                     </nav>
 
                     <div className="hidden md:flex md:gap-2 md:pr-2">
-                        <motion.button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleLogin}>Login</motion.button>
-                        <motion.button className="w-24 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleRegister}>Register</motion.button>
+                        <motion.button className="w-24 h-7 bg-primary rounded-[0.5rem] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleLogin}>Login</motion.button>
+                        <motion.button className="w-24 h-7 bg-primary rounded-[0.5rem] text-primary-foreground cursor-pointer" whileHover={{ scale: 1.1, transition: 0.1 }} transition={{ duration: 0.5 }} onClick={handleRegister}>Register</motion.button>
                     </div>
 
                     <div className="md:hidden gap-5 mr-5 cursor-pointer">
@@ -51,8 +51,8 @@ export function Header() {
                     </nav>
 
                     <div className="flex justify-center flex-col gap-2">
-                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" onClick={handleLogin}>Login</button>
-                        <button className="w-48 h-7 bg-primary rounded-[8px] text-primary-foreground cursor-pointer" onClick={handleRegister}>Register</button>
+                        <button className="w-48 h-7 bg-primary rounded-[0.5rem] text-primary-foreground cursor-pointer" onClick={handleLogin}>Login</button>
+                        <button className="w-48 h-7 bg-primary rounded-[0.5rem] text-primary-foreground cursor-pointer" onClick={handleRegister}>Register</button>
                     </div>
                 </motion.div>
             </main> }

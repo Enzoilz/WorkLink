@@ -54,8 +54,8 @@ export default function App() {
           </Route>
           
           <Route element={<ProtectedRoute />}>
-            <Route path='/add' element={<AddJob/>} />
-            <Route path='/sheet' element={<Sheet/>} />
+            <Route path='/add' element={<AddJob />} />
+            <Route path='/sheet' element={<Sheet />} />
           </Route>
 
           {/* TEST */}

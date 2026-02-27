@@ -9,33 +9,45 @@ import { useApp } from "../hooks/useApp";
 import { useNavigate } from "react-router";
 
 
-export const Sheet = () => {
+export function Sheet () {
 
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState([
+        // { id: 1, name: "Job été 2026", createdAt: "2026-02-24T08:48:39.000Z", updateAt: "2026-02-24T08:48:39.000Z" }
+    ]);
+    const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState(false);
     const [info, setInfo] = useState(false);
-    const { error, setError, auth } = useApp()
+    const { error, setError, auth} = useApp()
     const navigate = useNavigate()
 
     useEffect(() => {
-        fetchJobs();
+        const fetchJobs = async () => {
+            try {
+                const res = await fetch('http://localhost:3000/sheet', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${auth}`
+                    },
+                });
+                const data = await res.json();
+                
+                if (!res.ok) {
+                    return setError(data.message)
+                }
+                return setJobs(data.sheets)
+            } catch (err) {
+                throw new Error(`Nouvelle erreur détectée : ${err}`)
+            } finally {
+                setLoading(false)
+            }
+        };
+
+        fetchJobs()
     }, []);
 
-    const fetchJobs = async () => {
-        try {
-            const res = await fetch('http://localhost:3000/job/Job%20%C3%A9t%C3%A9%202026/1', {});
-            const data = await res.json();
-            if (data.message === "You must have to be connected") {
-                console.log(auth)
-                const deleteToken = localStorage.removeItem("accessToken", auth)
-                navigate("/login")
-            } else {
-                return data;
-            }
-        } catch (err) {
-            throw new Error(`Nouvelle erreur détectée : ${err}`)
-        };
-    };
+    if (loading) return <p>Chargement...</p>
+    if (error) return <p>{error}</p>
 
     return (
         <AnimatePage>
@@ -66,25 +78,22 @@ export const Sheet = () => {
                                 <thead>
                                     <tr className="border-b border-[#E0E7FF]">
                                         <th className="py-2">Company</th>
-                                        <th className="py-2">Job</th>
-                                        <th className="py-2">Contact</th>
-                                        <th className="py-2">Place</th>
                                         <th className="py-2">Date</th>
+                                        {/* <th className="py-2">Contact</th>
+                                        <th className="py-2">Place</th>
+                                        <th className="py-2">Date</th> */}
                                         <th className="py-2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {jobs.map((job) => (
-                                        <tr key={job.id} className="border-b border-[#E0E7FF]">
-                                            <td className="py-2">{job.company}</td>
-                                            <td className="py-2">{job.job}</td>
-                                            <td className="py-2">{job.email}</td>
-                                            <td className="py-2">{job.city}</td>
-                                            <td className="py-2">{job.date}</td>
+                                        <tr key={job.id} className="border-b border-[#E0E7FF] gap-2">
+                                            <td className="py-2">{job.name}</td>
+                                            <td className="py-2">{job.createdAt}</td>
                                             <td className="py-2 gap-2">
                                              {/* Test bouton delete et info */}
                                                 <div className="flex gap-2">
-                                                    <button onClick={setInfo(true)}><GrDocumentUser /></button>
+                                                    <button onClick={() => setInfo(true)}><GrDocumentUser /></button>
                                                     <button><RiDeleteBin6Line /></button>
                                                 </div>
                                             </td>
@@ -110,7 +119,7 @@ export const Sheet = () => {
                                         <div>
                                         {/* Test bouton delete et info */}
                                         <div className="flex gap-2">
-                                            <button onClick={setInfo(true)}><GrDocumentUser /></button>
+                                            <button onClick={() => setInfo(true)}><GrDocumentUser /></button>
                                             <button ><RiDeleteBin6Line /></button>
                                         </div>
 
