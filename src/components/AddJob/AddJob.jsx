@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useApp } from "../../hooks/useApp";
 
 export const AddJob = ({onClose, onSucces}) => {
     const createJob = { company: '', job: '', email: '', city: '', date: '', status:'', note:'' }
     const [form, setForm] = useState(createJob)
+    const { auth, error, setError } = useApp()
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -27,24 +29,24 @@ export const AddJob = ({onClose, onSucces}) => {
                 status: form.status.trim()
             }
 
-            const res = await fetch("", {
+            const res = await fetch("http://localhost:3000/sheet", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth}`,
                 },
                 body: JSON.stringify(contentJob)
             })
             const data = await res.json().catch(() => null);
+            console.log(res)
+            console.log(data)
 
             if (!res.ok) {
-                const message = data?.message || data?.error || `Erreur détectée ${res.status} ${res.statusText}`;
-                console.error(message);
+                return setError(data.message)
             }
             console.log("Job created :", data ?? contentJob)
             onSucces?.(); 
             onClose?.();
-            
-
             
         } catch (err) {
             throw new Error(err)
@@ -55,7 +57,7 @@ export const AddJob = ({onClose, onSucces}) => {
 
     return (
         <div className="w-full flex min-h-screen justify-center items-center fixed inset-0 z-50 bg-black/50">
-            <div className="flex justify-center w-155.75 py-5.75 px-10.75 flex-col items-start gap-2.5 bg-[#FFF] rounded-xl shadow-[0_2px_20px_0_rgba(139,92,246,0.40)]">
+            <div className="flex justify-center w-155.75 py-5.75 px-10.75 flex-col items-start gap-2.5 bg-[#FFF] rounded-xl shadow-[0_0.125rem_1.25rem_0_rgba(139,92,246,0.40)]">
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col items-start gap-15 self-stretch  ">
                         <h3 className="text-foreground text-[30px] font-semibold leading-7 mb-10.75 ">Ajouter une offre</h3>
@@ -142,7 +144,7 @@ export const AddJob = ({onClose, onSucces}) => {
                                     value={form.date}
                                     onChange={handleChange}
                                 />
-                            </div>
+                            </div>*/}
                         </div>
                         <div className="ml-45 mt-3 flex gap-3.5 ">
                             <button type="button" onClick={onClose} className="flex w-16.75 h-5.25 flex-col pt-3 pb-3

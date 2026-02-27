@@ -7,7 +7,7 @@ export const Login = () => {
 
     const user = {email:'', password:'' }
     const [form, setForm] = useState(user)
-    const { auth, setAuth, error, setError } = useApp()
+    const { auth, error, setError } = useApp()
     const navigate = useNavigate()
 
   const handleChange = (e) => {
@@ -36,16 +36,14 @@ export const Login = () => {
       });
 
       const data = await res.json()
-
       if (!res.ok) {
-        throw new Error(`Nouvelle Erreur détectée : ${res.status} ${res.statusText}`)
+        return setError(`${data.message}`)
       };
       const accessToken = localStorage.setItem("accessToken", data.token)
-
       if (auth) {
-        navigate("/dashboard")
+        navigate("/sheet")
       } else {
-        setError("Une erreur c'est produite !")
+        return setError(`${data.message}`)
       }
     } catch(err) {
       throw new Error(`Erreur détectée : ${err}`);
@@ -82,7 +80,7 @@ return (
             />
           </label>
 
-          {error ? <div className="bg-red-300 p-2 rounded">
+          {error ? <div className="relative bg-red-300 p-2 rounded">
               <p>{error}</p>
           </div> : ""}
           

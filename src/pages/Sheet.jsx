@@ -5,17 +5,46 @@ import { LuPanelRightClose } from "react-icons/lu";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { GrDocumentUser } from "react-icons/gr";
 import { AnimatePage } from "../components/AnimatePage/AnimatePage";
+import { useApp } from "../hooks/useApp";
+import { useNavigate } from "react-router";
 
 
-export const Sheet = () => {
+export function Sheet () {
 
-    const [jobs, setJobs] = useState([]);
+    const [jobs, setJobs] = useState([
+        // { id: 1, name: "Job été 2026", createdAt: "2026-02-24T08:48:39.000Z", updateAt: "2026-02-24T08:48:39.000Z" }
+    ]);
+    const [loading, setLoading] = useState(true)
     const [modal, setModal] = useState(false);
     const [info, setInfo] = useState(false);
+    const { error, setError, auth} = useApp()
+    const navigate = useNavigate()
 
 
     useEffect(() => {
-        fetchJobs();
+        const fetchJobs = async () => {
+            try {
+                const res = await fetch('http://localhost:3000/sheet', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${auth}`
+                    },
+                });
+                const data = await res.json();
+                
+                if (!res.ok) {
+                    return setError(data.message)
+                }
+                return setJobs(data.sheets)
+            } catch (err) {
+                throw new Error(`Nouvelle erreur détectée : ${err}`)
+            } finally {
+                setLoading(false)
+            }
+        };
+
+        fetchJobs()
     }, []);
 
     const fetchJobs = async () => {
@@ -58,10 +87,10 @@ export const Sheet = () => {
                                 <thead>
                                     <tr className="border-b border-border">
                                         <th className="py-2">Company</th>
-                                        <th className="py-2">Job</th>
-                                        <th className="py-2">Contact</th>
-                                        <th className="py-2">Place</th>
                                         <th className="py-2">Date</th>
+                                        {/* <th className="py-2">Contact</th>
+                                        <th className="py-2">Place</th>
+                                        <th className="py-2">Date</th> */}
                                         <th className="py-2">Action</th>
                                     </tr>
                                 </thead>

@@ -7,6 +7,7 @@ export const SignUp = () => {
 
     const user = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
     const [form, setForm] = useState(user)
+    const { error, setError } = useApp()
     const navigate = useNavigate()
 
 
@@ -39,11 +40,10 @@ export const SignUp = () => {
 
             const data = await res.json().catch(() => null);
 
-            if (!res.ok) {
-                const message = data?.message || data?.error || `Erreur détectée ${res.status} ${res.statusText}`;
-                console.error(message);
+            if (!res.ok) { 
+                return setError(`Register failed`)
             }
-            console.log("User created :", data ?? payload)
+            console.log("User created :", data.message ?? payload)
             navigate("/login")
         } catch(err) {
             throw new Error(err)
