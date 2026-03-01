@@ -5,7 +5,7 @@ import { Layout } from './layout/Layout'
 import { Login } from "./routes/Login"
 import { SignUp } from "./routes/SignUp"
 import { Home } from './pages/Home'
-import { Sheet } from './pages/Sheet'
+import { Sheet } from './pages/sheet'
 import { AddJob } from './components/AddJob/AddJob'
 
 export const AppContext = createContext(AppProvider);
@@ -58,7 +58,7 @@ export default function App() {
           </Route>
 
           {/* TEST */}
-          <Route path='asideTest' element={<Aside />} />
+          {/* <Route path='asideTest' element={<Aside />} /> */}
         </Routes>
       </AppProvider>
     </BrowserRouter>
